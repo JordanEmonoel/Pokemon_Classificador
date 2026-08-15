@@ -1,0 +1,16 @@
+# dataset (imagens raspadas de varias fontes, nao redistribuidas por direitos autorais)
+data/
+
+# checkpoints treinados (binarios grandes, derivados do dataset acima)
+results/**/*.pt
+
+# logs de treino e cache
+*.log
+__pycache__/
+*.pyc
+
+# projetos antigos ja consolidados nos 4 arquivos principais
+archive_old_code/
+
+# config local de ferramentas
+.claude/
