@@ -9,6 +9,12 @@ dataset, arquitetura de rede neural, comparação de abordagens e avaliação
 honesta dos resultados (incluindo um bug de vazamento de dados encontrado e
 corrigido no meio do caminho).
 
+<p align="center">
+  <img src="docs/images/demo_ensemble_pikachu.png" width="270">
+  <img src="docs/images/demo_transfer_gengar.png" width="270">
+  <img src="docs/images/demo_scratch_dragonite.png" width="270">
+</p>
+
 ## Motivação
 
 Ideia inspirada [neste vídeo](https://www.youtube.com/watch?v=IoM5zUI8oFc), sobre
@@ -32,6 +38,14 @@ Avaliados no conjunto de teste (2.478 imagens, sem sobreposição com treino/val
   <img src="docs/images/transfer_curves.png" width="420">
   <img src="docs/images/transfer_confusion_matrix.png" width="360">
 </p>
+
+Um exemplo real do comportamento diferente das duas abordagens: pedindo a
+classificação de um Dragonite, a CNN do zero acerta (82.5%), mas coloca
+Charizard como segunda opção (11.9%). Os dois são dragões alaranjados da
+primeira geração. É um bom retrato da limitação conhecida de uma rede menor
+sem conhecimento visual prévio: ela se apoia mais em cor do que forma, algo
+que o transfer learning, por já ter aprendido conceitos visuais gerais no
+ImageNet, praticamente não sofre.
 
 ### O bug que quase inflou os números
 
@@ -67,7 +81,7 @@ pokemon-classifier/
 ├── models.py           # dataloaders, arquiteturas, losses, augmentation, loop de treino
 ├── train.py             # treino via CLI (--arch scratch|transfer)
 ├── app.py                # avaliação, ensemble, predição de imagem, servidor web
-├── docs/images/           # gráficos de treino e matrizes de confusão
+├── docs/images/           # gráficos de treino, matrizes de confusão e prints da interface
 ├── requirements.txt
 └── README.md
 ```
