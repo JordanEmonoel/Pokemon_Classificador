@@ -290,9 +290,9 @@ HTML_PAGE = r"""<!DOCTYPE html>
 
 <div class="container">
   <div class="model-select">
-    <button id="btnEnsemble" class="active" data-model="ensemble">Ensemble (94.7%)</button>
-    <button id="btnTransfer" data-model="transfer_151">Transfer Learning (94.4%)</button>
-    <button id="btnScratch" data-model="scratch_151">CNN do Zero (82.8%)</button>
+    <button id="btnEnsemble" class="active" data-model="ensemble">Ensemble</button>
+    <button id="btnTransfer" data-model="transfer_151">Transfer Learning</button>
+    <button id="btnScratch" data-model="scratch_151">CNN do Zero</button>
   </div>
 
   <div id="dropzone">
