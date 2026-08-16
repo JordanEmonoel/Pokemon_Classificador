@@ -12,9 +12,9 @@ corrigido no meio do caminho).
 ## Motivação
 
 Ideia inspirada [neste vídeo](https://www.youtube.com/watch?v=IoM5zUI8oFc), sobre
-alguém treinando uma IA do zero para jogar Super Mario. Comecei pequeno — 4
+alguém treinando uma IA do zero para jogar Super Mario. Comecei pequeno, com 4
 espécies fáceis de distinguir só pela cor (Bulbasaur, Charmander, Pikachu,
-Squirtle) — para aprender o básico, e depois escalei para as 151 espécies
+Squirtle), para aprender o básico, e depois escalei para as 151 espécies
 reais da primeira geração, onde o problema fica bem mais difícil (Charmander
 e Charizard, por exemplo, são quase gêmeos de cor para um modelo simples).
 
@@ -26,7 +26,7 @@ Avaliados no conjunto de teste (2.478 imagens, sem sobreposição com treino/val
 |---|---|---|
 | CNN do zero (residual + SE blocks, Focal Loss, Mixup/CutMix) | 82.8% | 94.6% |
 | Transfer Learning (ResNet18, fine-tuning parcial do backbone) | 94.4% | 98.8% |
-| **Ensemble (20% CNN do zero + 80% transfer learning)** | **94.7%** | — |
+| **Ensemble (20% CNN do zero + 80% transfer learning)** | **94.7%** | n/d |
 
 <p align="center">
   <img src="docs/images/transfer_curves.png" width="420">
@@ -37,8 +37,8 @@ Avaliados no conjunto de teste (2.478 imagens, sem sobreposição com treino/val
 
 No meio do processo, o script de geração dos splits treino/val/teste não
 limpava a pasta de saída antes de gerar de novo. Como o dataset cresceu várias
-vezes ao longo do projeto, arquivos de execuções antigas ficaram acumulados —
-resultado: 1.617 imagens apareciam tanto em treino quanto em teste ao mesmo
+vezes ao longo do projeto, arquivos de execuções antigas ficaram acumulados.
+Resultado: 1.617 imagens apareciam tanto em treino quanto em teste ao mesmo
 tempo, inflando artificialmente a acurácia relatada (95.8% em vez dos 94.4%
 reais). Encontrado, corrigido e todos os modelos reavaliados no conjunto de
 teste limpo antes de fechar os números acima.
@@ -90,9 +90,9 @@ python app.py predict caminho/da/imagem.jpg --model transfer
 python app.py serve
 ```
 
-O dataset de imagens não está incluído neste repositório (raspado de várias
-fontes públicas, majoritariamente arte oficial e fan art de Pokémon — não
-redistribuído aqui por questão de direitos autorais). O código em
+O dataset de imagens não está incluído neste repositório. Foi raspado de
+várias fontes públicas, majoritariamente arte oficial e fan art de Pokémon,
+e não é redistribuído aqui por questão de direitos autorais. O código em
 `data_pipeline.py` documenta o processo de curadoria usado.
 
 ## Stack
