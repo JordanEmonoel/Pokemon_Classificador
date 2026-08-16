@@ -494,7 +494,7 @@ def cmd_serve(args):
             "model": model_type,
         })
 
-    flask_app.run(debug=args.debug, port=args.port)
+    flask_app.run(host="127.0.0.1", debug=args.debug, port=args.port)  # explicito: so acessivel localmente
 
 
 # ---------------------------------------------------------------------------
@@ -522,7 +522,8 @@ def main():
 
     p_serve = sub.add_parser("serve", help="sobe o servidor web com interface visual")
     p_serve.add_argument("--port", type=int, default=5000)
-    p_serve.add_argument("--debug", action="store_true", default=True)
+    p_serve.add_argument("--debug", action="store_true", default=False,
+                          help="ativa o modo debug do Flask (console interativo em caso de erro; nunca use isso se o servidor estiver acessivel pela rede)")
 
     args = parser.parse_args()
 
