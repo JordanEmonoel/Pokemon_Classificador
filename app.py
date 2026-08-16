@@ -99,10 +99,25 @@ def cmd_evaluate(args):
     print(f"top-5 accuracy: {top5_acc:.3f}  ({top5_acc*100:.1f}% dos casos com a classe certa entre as 5 mais provaveis)")
 
     cm = confusion_matrix(all_labels, all_preds)
-    disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=class_names)
-    fig, ax = plt.subplots(figsize=(6, 6))
-    disp.plot(ax=ax, cmap="Blues", colorbar=False)
-    plt.title(f"Matriz de confusao - {args.model}")
+    n_classes = len(class_names)
+
+    if n_classes > 30:
+        # com muitas classes, rotulo de texto por classe fica ilegivel --
+        # mostra so a matriz (diagonal = acertos) com escala de cor, sem tentar
+        # encaixar 151 nomes nos eixos
+        fig, ax = plt.subplots(figsize=(9, 8))
+        im = ax.imshow(cm, cmap="Blues")
+        ax.set_title(f"Matriz de confusao - {args.model} ({n_classes} classes)")
+        ax.set_xlabel("Classe prevista")
+        ax.set_ylabel("Classe real")
+        ax.set_xticks([]); ax.set_yticks([])
+        fig.colorbar(im, ax=ax, label="numero de imagens")
+    else:
+        disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=class_names)
+        fig, ax = plt.subplots(figsize=(6, 6))
+        disp.plot(ax=ax, cmap="Blues", colorbar=False)
+        plt.title(f"Matriz de confusao - {args.model}")
+
     plt.tight_layout()
     out_path = results_dir / "confusion_matrix.png"
     fig.savefig(out_path, dpi=120)
