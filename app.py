@@ -285,7 +285,7 @@ HTML_PAGE = r"""<!DOCTYPE html>
     </svg>
     <span>Pokemon Classifier</span>
   </h1>
-  <p>151 especies da 1a geracao &middot; envie uma imagem e veja o palpite do modelo</p>
+  <p>151 esp&eacute;cies da 1&ordf; gera&ccedil;&atilde;o &middot; envie uma imagem e veja o palpite do modelo</p>
 </header>
 
 <div class="container">
