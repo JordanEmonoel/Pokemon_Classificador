@@ -113,14 +113,17 @@ precisar treinar nada.
 ```bash
 pip install -r requirements.txt
 
-# treino (precisa de um dataset organizado em data/splits/{train,val,test}/<classe>/)
-python train.py --arch transfer --splits-dir data/splits --results-dir results/transfer
+# treino (precisa de um dataset organizado em data/splits_151/{train,val,test}/<classe>/)
+python train.py --arch transfer --splits-dir data/splits_151 --results-dir results/transfer_151
 
 # avaliação
-python app.py evaluate --model transfer --splits-dir data/splits --tta-n 10
+python app.py evaluate --model transfer_151 --splits-dir data/splits_151 --tta-n 10
+
+# comparação de pesos do ensemble entre os dois modelos
+python app.py ensemble --splits-dir data/splits_151
 
 # classificar uma imagem via linha de comando
-python app.py predict caminho/da/imagem.jpg --model transfer
+python app.py predict caminho/da/imagem.jpg --model transfer_151
 
 # interface web (upload de imagem, escolha entre os 3 modelos)
 python app.py serve
