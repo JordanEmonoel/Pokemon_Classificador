@@ -1,8 +1,11 @@
 # dataset (imagens raspadas de varias fontes, nao redistribuidas por direitos autorais)
 data/
 
-# checkpoints treinados (binarios grandes, derivados do dataset acima)
+# checkpoints treinados (binarios grandes, distribuidos via GitHub Releases)
 results/**/*.pt
+
+# contact sheets da curadoria (18 MB de imagens do dataset)
+reports/
 
 # logs de treino e cache
 *.log

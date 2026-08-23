@@ -82,9 +82,31 @@ pokemon-classifier/
 ├── train.py             # treino via CLI (--arch scratch|transfer)
 ├── app.py                # avaliação, ensemble, predição de imagem, servidor web
 ├── docs/images/           # gráficos de treino, matrizes de confusão e prints da interface
+├── results/<variante>/     # histórico de treino, curvas e matriz de confusão de cada rodada
 ├── requirements.txt
 └── README.md
 ```
+
+## Modelos treinados
+
+O histórico de cada rodada de treino está versionado em `results/<variante>/`
+(`history.json` com métricas por época, `curves.png`, `confusion_matrix.png` e
+`class_to_idx.json`). As variantes `_5class` e as de 4 classes são as etapas
+iniciais do projeto; `scratch_151` e `transfer_151` são os modelos dos números
+reportados acima.
+
+Os pesos (`best_model.pt`) são binários de 1 a 44 MB e não ficam no repositório.
+Estão publicados na [última release](https://github.com/JordanEmonoel/Pokemon_Classificador/releases/latest).
+Para rodar a inferencia, baixe e coloque cada arquivo na pasta da variante
+correspondente:
+
+```
+results/transfer_151/best_model.pt
+results/scratch_151/best_model.pt
+```
+
+Feito isso, `python app.py predict imagem.jpg --model transfer_151` funciona sem
+precisar treinar nada.
 
 ## Como rodar
 
