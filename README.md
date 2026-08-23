@@ -89,31 +89,39 @@ pokemon-classifier/
 
 ## Modelos treinados
 
-O histórico de cada rodada de treino está versionado em `results/<variante>/`
-(`history.json` com métricas por época, `curves.png`, `confusion_matrix.png` e
-`class_to_idx.json`). As variantes `_5class` e as de 4 classes são as etapas
-iniciais do projeto; `scratch_151` e `transfer_151` são os modelos dos números
-reportados acima.
+Os pesos dos dois modelos de 151 classes estão no repositório (45 MB no total),
+em `results/transfer_151/best_model.pt` e `results/scratch_151/best_model.pt`.
+Ou seja: dá para clonar e classificar imagens na hora, sem treinar nada e sem
+precisar do dataset.
 
-Os pesos (`best_model.pt`) são binários de 1 a 44 MB e não ficam no repositório.
-Estão publicados na [última release](https://github.com/JordanEmonoel/Pokemon_Classificador/releases/latest).
-Para rodar a inferencia, baixe e coloque cada arquivo na pasta da variante
-correspondente:
-
-```
-results/transfer_151/best_model.pt
-results/scratch_151/best_model.pt
-```
-
-Feito isso, `python app.py predict imagem.jpg --model transfer_151` funciona sem
-precisar treinar nada.
+O histórico de cada rodada de treino também está versionado em
+`results/<variante>/`: `history.json` com as métricas por época, `curves.png`,
+`confusion_matrix.png` e `class_to_idx.json`. As variantes `_5class` e as de 4
+classes são as etapas iniciais do projeto e estão ali como registro; só o
+histórico delas foi mantido, não os pesos.
 
 ## Como rodar
 
+Para brincar com o app não precisa de mais nada além de clonar o repositório:
+
 ```bash
+git clone https://github.com/JordanEmonoel/Pokemon_Classificador.git
+cd Pokemon_Classificador
 pip install -r requirements.txt
 
-# treino (precisa de um dataset organizado em data/splits_151/{train,val,test}/<classe>/)
+# interface web: sobe em http://localhost:5000, arrasta uma imagem e escolhe
+# entre CNN do zero, transfer learning ou o ensemble dos dois
+python app.py serve
+
+# ou pela linha de comando
+python app.py predict caminho/da/imagem.jpg --model transfer_151
+```
+
+Os comandos abaixo mexem com treino e avaliação, e esses sim precisam do
+dataset organizado em `data/splits_151/{train,val,test}/<classe>/`:
+
+```bash
+# treino
 python train.py --arch transfer --splits-dir data/splits_151 --results-dir results/transfer_151
 
 # avaliação
@@ -121,12 +129,6 @@ python app.py evaluate --model transfer_151 --splits-dir data/splits_151 --tta-n
 
 # comparação de pesos do ensemble entre os dois modelos
 python app.py ensemble --splits-dir data/splits_151
-
-# classificar uma imagem via linha de comando
-python app.py predict caminho/da/imagem.jpg --model transfer_151
-
-# interface web (upload de imagem, escolha entre os 3 modelos)
-python app.py serve
 ```
 
 O dataset de imagens não está incluído neste repositório. Foi raspado de
